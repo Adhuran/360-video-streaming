@@ -1,0 +1,8 @@
+Python 3.10.13
+kmeans_pytorch
+scikit_learn
+tqdm
+scipy
+numpy
+pytorch==1.13.0 torchvision==0.14.0 cpuonly -c pytorch
+cv2
