@@ -790,7 +790,10 @@ def preprocess_video(source_video_uri, dst_video_folder, chunk_info, user_data, 
         if user_data['tile_idx'] == 0:
             src_resolution = [video_info['height'],video_info['width']]
             dst_resolution = [config_params['converted_height'], config_params['converted_width']]
-            #best_qp = get_rd_analysis(config_params['ffmpeg_settings'], source_video_uri, dst_video_folder, user_data, chunk_info)
+            #try:
+            #    best_qp = get_rd_analysis(config_params['ffmpeg_settings'], source_video_uri, dst_video_folder, user_data, chunk_info)
+            #except:
+                
             best_qp = user_data['opt']['e3po_settings']['encoding_params']['qp_list'][0]                        
             selected_tiles = viewport_prediction_chunk(source_video_uri, src_projection, dst_projection, src_resolution, dst_resolution, dst_video_folder, chunk_info, config_params, user_data)                       
 
@@ -1181,26 +1184,26 @@ def update_decision_info(user_data, tile_record, curr_ts, dl_list):
                 tile_record_x.append(12)
             
             if (all(x in tile_record_x for x in [2, 6])):
-                tile_record_x.remove(4)
-                tile_record_x.remove(8)
-                tile_record_x.append(13)
-
-        if (all(x in tile_record_x for x in [1, 5])):
-                tile_record_x.remove(1)
-                tile_record_x.remove(5)
-                tile_record_x.append(12)
-        if (all(x in tile_record_x for x in [2, 6])):
                 tile_record_x.remove(2)
                 tile_record_x.remove(6)
                 tile_record_x.append(13)
+
+        if (all(x in tile_record_x for x in [1, 5])):
+            tile_record_x.remove(1)
+            tile_record_x.remove(5)
+            tile_record_x.append(12)
+        if (all(x in tile_record_x for x in [2, 6])):
+            tile_record_x.remove(2)
+            tile_record_x.remove(6)
+            tile_record_x.append(13)
         if (all(x in tile_record_x for x in [3, 7])):
-                tile_record_x.remove(3)
-                tile_record_x.remove(7)
-                tile_record_x.append(14)
+            tile_record_x.remove(3)
+            tile_record_x.remove(7)
+            tile_record_x.append(14)
         if (all(x in tile_record_x for x in [4, 8])):
-                tile_record_x.remove(4)
-                tile_record_x.remove(8)
-                tile_record_x.append(15)
+            tile_record_x.remove(4)
+            tile_record_x.remove(8)
+            tile_record_x.append(15)
         #if (9 in user_data['latest_decision']):
         #    if 2 in final_tile_set:
         #        final_tile_set.remove(2)
@@ -1604,7 +1607,10 @@ def download_decision2(network_stats, motion_history, video_size, curr_ts, user_
         return dl_list, user_data
 
     predicted_record = predict_motion_tile_(motion_history, config_params['motion_history_size'], config_params['motion_prediction_size'])  # motion prediction
-    tile_record = tile_decision2(predicted_record, video_size, video_info['range_fov'], chunk_idx, user_data)     # tile decision
+    try:
+        tile_record = tile_decision2(predicted_record, video_size, video_info['range_fov'], chunk_idx, user_data)     # tile decision
+    except:
+        tile_record = tile_decision3(predicted_record, video_size, video_info['range_fov'], chunk_idx, user_data)     # tile decision
     dl_list = generate_dl_list(chunk_idx, tile_record, latest_decision, dl_list)
 
     user_data = update_decision_info2(user_data, tile_record, curr_ts)            # update decision information
@@ -1710,7 +1716,215 @@ def tile_decision2(predicted_record, video_size, range_fov, chunk_idx, user_data
 
     final_tile_set = [i for i in tile_record if i in tile_prediction[result_chunk_name]['Predicted_tiles']]
 
-    tile_record_x = [x for x in final_tile_set]   
+    tile_record_x = [x for x in final_tile_set]
+    
+    
+    if (all(x in tile_record_x for x in [1, 2, 3, 4, 5, 6, 7, 8])):
+        if 16 not in user_data['latest_decision']:
+            tile_record_x = []
+            tile_record_x.append(16)
+    if 16 not in user_data['latest_decision']:
+
+        if (9 in user_data['latest_decision']):
+            if 1 in tile_record_x:
+                tile_record_x.remove(1)
+            if 2 in tile_record_x:
+                tile_record_x.remove(2)
+            if 5 in tile_record_x:
+                tile_record_x.remove(5)
+            if 6 in tile_record_x:
+                tile_record_x.remove(6)
+            if 12 in tile_record_x:
+                tile_record_x.remove(12)
+            if 13 in tile_record_x:
+                tile_record_x.remove(13)
+
+        if (10 in user_data['latest_decision']):
+            if 2 in tile_record_x:
+                tile_record_x.remove(2)
+            if 3 in tile_record_x:
+                tile_record_x.remove(3)
+            if 6 in tile_record_x:
+                tile_record_x.remove(6)
+            if 7 in tile_record_x:
+                tile_record_x.remove(7)
+            if 13 in tile_record_x:
+                tile_record_x.remove(13)
+            if 14 in tile_record_x:
+                tile_record_x.remove(14)
+
+        if (11 in user_data['latest_decision']):
+            if 3 in tile_record_x:
+                tile_record_x.remove(3)
+            if 4 in tile_record_x:
+                tile_record_x.remove(4)
+            if 7 in tile_record_x:
+                tile_record_x.remove(7)
+            if 8 in tile_record_x:
+                tile_record_x.remove(8)
+            if 14 in tile_record_x:
+                tile_record_x.remove(14)
+            if 15 in tile_record_x:
+                tile_record_x.remove(15)
+
+        if (12 in user_data['latest_decision']):
+            if 1 in tile_record_x:
+                tile_record_x.remove(1)
+            if 5 in tile_record_x:
+                tile_record_x.remove(5)
+        if (13 in user_data['latest_decision']):
+            if 2 in tile_record_x:
+                tile_record_x.remove(2)
+            if 6 in tile_record_x:
+                tile_record_x.remove(6)
+        if (14 in user_data['latest_decision']):
+            if 3 in tile_record_x:
+                tile_record_x.remove(3)
+            if 7 in tile_record_x:
+                tile_record_x.remove(7)
+        if (15 in user_data['latest_decision']):
+            if 4 in tile_record_x:
+                tile_record_x.remove(4)
+            if 8 in tile_record_x:
+                tile_record_x.remove(8)
+
+        if (all(x in tile_record_x for x in [2, 3, 6, 7])) and (not any(x in user_data['latest_decision'] for x in [2, 3, 6, 7, 13, 14])):
+                tile_record_x.remove(2)
+                tile_record_x.remove(3)
+                tile_record_x.remove(6)
+                tile_record_x.remove(7)
+                tile_record_x.append(10)
+
+        elif (all(x in tile_record_x for x in [1, 2, 5, 6])) and (not any(x in user_data['latest_decision'] for x in [1, 2, 5, 6, 12, 13])):
+                tile_record_x.remove(1)
+                tile_record_x.remove(2)
+                tile_record_x.remove(5)
+                tile_record_x.remove(6)
+                tile_record_x.append(9)
+            
+
+        elif (all(x in tile_record_x for x in [3, 4, 7, 8])) and (not any(x in user_data['latest_decision'] for x in [3, 4, 6, 7, 14, 15])):
+                tile_record_x.remove(3)
+                tile_record_x.remove(4)
+                tile_record_x.remove(7)
+                tile_record_x.remove(8)
+                tile_record_x.append(11)
+            
+                
+
+        if (all(x in tile_record_x for x in [1, 5])):
+                tile_record_x.remove(1)
+                tile_record_x.remove(5)
+                tile_record_x.append(12)
+
+        if (all(x in tile_record_x for x in [2, 6])):
+                
+                tile_record_x.remove(2)
+                tile_record_x.remove(6)
+                tile_record_x.append(13)
+                
+        if (all(x in tile_record_x for x in [3, 7])):
+                tile_record_x.remove(3)
+                tile_record_x.remove(7)
+                tile_record_x.append(14)
+                
+        if (all(x in tile_record_x for x in [4, 8])):
+                
+                tile_record_x.remove(4)
+                tile_record_x.remove(8)
+                tile_record_x.append(15)
+                
+        if ((1 in user_data['latest_decision']) or (5 in user_data['latest_decision'])) and 12 in tile_record_x:
+            tile_record_x.append(1)
+            tile_record_x.append(5)
+            tile_record_x.remove(12)
+
+        if ((2 in user_data['latest_decision']) or (6 in user_data['latest_decision'])) and 13 in tile_record_x:
+            tile_record_x.append(2)
+            tile_record_x.append(6)
+            tile_record_x.remove(13)
+
+        if ((3 in user_data['latest_decision']) or (7 in user_data['latest_decision'])) and 14 in tile_record_x:
+            tile_record_x.append(3)
+            tile_record_x.append(7)
+            tile_record_x.remove(14)
+
+        if ((4 in user_data['latest_decision']) or (8 in user_data['latest_decision'])) and 15 in tile_record_x:
+            tile_record_x.append(4)
+            tile_record_x.append(8)
+            tile_record_x.remove(15)
+
+    
+    tile_record_x.append(-1)
+
+    return tile_record_x
+
+
+def tile_decision3(predicted_record, video_size, range_fov, chunk_idx, user_data):
+    """
+    Deciding which tiles should be transmitted for each chunk, within the prediction window
+    (As an example, users can implement their customized function.)
+
+    Parameters
+    ----------
+    predicted_record: dict
+        the predicted motion, with format {yaw: , pitch: , scale:}, where
+        the parameter 'scale' is used for transcoding approach
+    video_size: dict
+        the recorded whole video size after video preprocessing
+    range_fov: list
+        degree range of fov, with format [height, width]
+    chunk_idx: int
+        index of current chunk
+    user_data: dict
+        user related data structure, necessary information for tile decision
+
+    Returns
+    -------
+    tile_record: list
+        the decided tile list of current update, each item is the chunk index
+    """
+    # The current tile decision method is to sample the fov range corresponding to the predicted motion of each chunk,
+    # and the union of the tile sets mapped by these sampling points is the tile set to be transmitted.
+
+    #if (user_data['video_analysis'][chunk_idx]['data'] == None):
+    #    user_data['video_analysis'][chunk_idx]['background_tile_id'] = f"chunk_{str(chunk_idx).zfill(4)}_background"
+    #    tile_idx = config_params['total_tile_num']
+    #    tile_id = f"chunk_{str(chunk_idx).zfill(4)}_tile_{str(tile_idx).zfill(3)}"
+    #    user_data['video_analysis'][chunk_idx]['tile_id'] = tile_id
+    #    predicted_point = predicted_record[0]
+    #    _3d_polar_coord = fov_to_3d_polar_coord([float(predicted_motion['yaw']), float(predicted_motion['pitch']), 0], range_fov, [600, 600])
+    #    pixel_coord = pixel_coord_to_tile_corrected(_3d_polar_coord, config_params['projection_mode'], [converted_height, converted_width])
+        
+    try:
+        curr_path = os.path.dirname(os.path.abspath(__file__)) 
+        json_path=os.path.join(curr_path,"tile_prediction.json")
+        result_chunk_name = f"chunk_{str(chunk_idx)}"
+        tile_prediction =  read_tile_prediction_json(json_path)
+    except:
+        tile_prediction = [1,2,3,4,5,6,7,8]
+    
+    config_params = user_data['config_params']
+    tile_record = []
+    sampling_size = [50, 50]
+    converted_width = user_data['config_params']['converted_width']
+    converted_height = user_data['config_params']['converted_height']
+    for predicted_motion in predicted_record:
+        _3d_polar_coord = fov_to_3d_polar_coord([float(predicted_motion['yaw']), float(predicted_motion['pitch']), 0], range_fov, sampling_size)
+        pixel_coord = _3d_polar_coord_to_pixel_coord(_3d_polar_coord, config_params['projection_mode'], [converted_height, converted_width])
+        coord_tile_list = pixel_coord_to_tile_corrected_decision_making(pixel_coord, config_params['total_tile_num'], video_size, chunk_idx)
+        unique_tile_list = [int(item) for item in np.unique(coord_tile_list)]
+        tile_record.extend(unique_tile_list)
+
+    if 0 in tile_record:
+        tile_record.remove(0)
+    if (config_params['total_tile_num']-1) in tile_record:
+        tile_record.remove(config_params['total_tile_num']-1)
+
+    final_tile_set = [i for i in tile_record if i in tile_prediction[result_chunk_name]['Predicted_tiles']]
+
+    tile_record_x = [x for x in final_tile_set]
+    
     
     tile_record_x.append(-1)
 
