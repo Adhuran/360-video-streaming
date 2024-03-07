@@ -9,6 +9,7 @@ This code is developed as a part of [ACM MMSys Grand Challenge on 360 degree vid
 * Download all source files from this repo and place them inside `e3p0/approaches/360LCY`
 * Weights for viewport prediction can be found [here](https://kingstonuniversity-my.sharepoint.com/:u:/g/personal/ku75509_kingston_ac_uk/EUvtM0ciscdLnv__MAjHtaUBOKRJlBLkg7nWNpiZRB-0Rg?e=C6PmdV)
 * Place the weights inside `e3p0/approaches/360LCY/viewport/model`
+* Install the requirements `pip install -r requirements.txt`
 
 # Running the software
 * The configurations relating to tiling can be modified using `e3p0/approaches/360LCY/360LCY.yaml`
@@ -18,4 +19,6 @@ This code is developed as a part of [ACM MMSys Grand Challenge on 360 degree vid
 
 
 # ACKOWLEDGMENT
+The code follows [E3PO](https://github.com/bytedance/E3PO) logic and imports a few functions. The Spherical convolutions and Salient ResNet in viewport prediction are adopted from [spherical CNNS](https://github.com/jonkhler/s2cnn) and [Salient-Net](https://github.com/AmigoCDT/Salient-Net/tree/master) repositories respectively. The saliency calculation imports the motion_detection module from the [deepgaze](https://github.com/mpatacchiola/deepgaze/tree/master) repository.  
+
 
