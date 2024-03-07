@@ -16,7 +16,7 @@ This code is developed as a part of [ACM MMSys Grand Challenge on 360 degree vid
 
 
 
-```python ./e3po/make_preprocessing.py -approach_name erp -approach_type on_demand```
+`python ./e3po/make_preprocessing.py -approach_name erp -approach_type on_demand`
 
 
 # ACKOWLEDGMENT
