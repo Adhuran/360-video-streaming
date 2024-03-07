@@ -5,6 +5,8 @@ This code is developed as a part of [ACM MMSys Grand Challenge on 360 degree vid
 # Quickstart
 * Clone the latest [E3P0](https://github.com/bytedance/E3PO/tree/main) code
 * Follow instructions and implement E3PO
-* Create a folder called '360LCY' inside 'e3p0/approaches'
-* Download this code and place this code inside 'e3p0/approaches/360LCY'
+* Create a folder called `360LCY` inside `e3p0/approaches`
+* Download this code and place this code inside `e3p0/approaches/360LCY`
+* Weights for viewport prediction can be found [here](https://kingstonuniversity-my.sharepoint.com/:u:/g/personal/ku75509_kingston_ac_uk/EUvtM0ciscdLnv__MAjHtaUBOKRJlBLkg7nWNpiZRB-0Rg?e=C6PmdV)
+* Place the weights inside `e3p0/approaches/360LCY/viewport/model`
 
