@@ -17,8 +17,10 @@ This code is developed as a part of [ACM MMSys Grand Challenge on 360 degree vid
 * To run the stream selector module: `python ./e3po/make_preprocessing.py -approach_name 360LCY -approach_type on_demand`
 * To run the evalution module: `python ./e3po/make_preprocessing.py -approach_name 360LCY -approach_type on_demand`
 
+# Contact
+If there are any inquiries, kindly contact j.adhuran@kingston.ac.uk or m.martini@kingston.ac.uk 
 
-# ACKOWLEDGMENT
+# Acknowledgement
 The code follows [E3PO](https://github.com/bytedance/E3PO) logic and imports a few functions. The Spherical convolutions and Salient ResNet in viewport prediction are adopted from [spherical CNNS](https://github.com/jonkhler/s2cnn) and [Salient-Net](https://github.com/AmigoCDT/Salient-Net/tree/master) repositories respectively. The saliency calculation imports the motion_detection module from the [deepgaze](https://github.com/mpatacchiola/deepgaze/tree/master) repository.  
 
 
