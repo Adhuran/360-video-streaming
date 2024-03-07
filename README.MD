@@ -1,4 +1,4 @@
-![Image](/images/mmsys-logo.png)
+![Image](/images/ERP.png)
 
 This code is developed as a part of [ACM MMSys Grand Challenge on 360 degree video streaming](https://2024.acmmmsys.org/gc/360-vod/). This functionality supports on-demand streaming scenarios of 360-degree videos.
 
@@ -8,7 +8,7 @@ This code is developed as a part of [ACM MMSys Grand Challenge on 360 degree vid
 * Create a folder called `360LCY` inside `e3p0/approaches`
 * Download all source files from this repo and place them inside `e3p0/approaches/360LCY`
 * Pre-trained weights for viewport prediction can be found [here](https://kingstonuniversity-my.sharepoint.com/:u:/g/personal/ku75509_kingston_ac_uk/EUvtM0ciscdLnv__MAjHtaUBOKRJlBLkg7nWNpiZRB-0Rg?e=C6PmdV)
-* Place the weights inside `e3p0/approaches/360LCY/viewport/model`
+* Create a folder `e3p0/approaches/360LCY/viewport/model` and save the weights.
 * Install the requirements `pip install -r requirements.txt`
 
 # Running the software
