@@ -1,17 +1,4 @@
-#!/usr/bin/env python
-
-#The MIT License (MIT)
-#Copyright (c) 2016 Massimiliano Patacchiola
-#
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
-#MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
-#CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
-#SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#In this example three motion detectors are compared:
-#frame differencing, MOG, MOG2.
-#Given a video as input "cars.avi" it returns four
-#different videos: original, differencing, MOG, MOG2
+# Author: jayasingam adhuran
 
 import numpy as np
 import cv2

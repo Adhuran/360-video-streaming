@@ -1,21 +1,4 @@
-# E3PO, an open platform for 360˚ video streaming simulation and evaluation.
-# Copyright 2023 ByteDance Ltd. and/or its affiliates
-#
-# This file is part of E3PO.
-#
-# E3PO is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# E3PO is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, see:
-#    <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>
+# Author: jayasingam adhuran
 
 import os
 import cv2
@@ -114,7 +97,7 @@ def pixel_coord_to_tile_pred(pixel_coord, total_tile_num, user_data):
     return coord_tile_list
 
 
-def get_opt_(video_stream):
+def get_opt_(video_stream, source_video_uri):
     """
     Get options.
     Read command line parameters, read configuration file parameters, and initialize logger.
@@ -139,6 +122,7 @@ def get_opt_(video_stream):
     project_dir = os.path.dirname(os.path.abspath(__file__)).split('approaches')[0]
     opt_path = 'e3po.yml'
     try:
+        
         if os.path.exists(os.path.join(project_dir, opt_path)):
             with open(project_dir + opt_path, 'r', encoding='UTF-8') as f:
                 opt = yaml.safe_load(f.read())
@@ -160,8 +144,11 @@ def get_opt_(video_stream):
             opt['e3po_settings']['metric']['range_fov'] = [ 89, 89 ]
             opt['e3po_settings']['metric']['fov_resolution'] = [ 1920, 1832 ]
     except:
+        tmp_cap = cv2.VideoCapture()
+        assert tmp_cap.open(source_video_uri), f"[error] Can't read video[{source_video_uri}]"
+        frame_rate = tmp_cap.get(cv2.CAP_PROP_FPS)
         opt ={'e3po_settings':{'encoding_params':{}, 'metric':{}}}
-        opt['e3po_settings']['encoding_params']['video_fps'] = video_stream['avg_frame_rate']
+        opt['e3po_settings']['encoding_params']['video_fps'] = frame_rate
         opt['e3po_settings']['encoding_params']['qp_list'] = [29]
         opt['e3po_settings']['metric']['gc_w1'] = 0.09
         opt['e3po_settings']['metric']['gc_alpha'] = 0.006
@@ -190,7 +177,6 @@ def viewport_prediction_chunk(source_video_uri, src_proj, dst_proj, src_resoluti
     try:
         tmp_cap = cv2.VideoCapture()
         assert tmp_cap.open(source_video_uri), f"[error] Can't read video[{source_video_uri}]"
-    
         src_video_h = src_resolution[0]
         src_video_w = src_resolution[1]
         ffmpeg_settings = config_params['ffmpeg_settings']
@@ -768,8 +754,8 @@ def preprocess_video(source_video_uri, dst_video_folder, chunk_info, user_data, 
 
         config_params = user_data['config_params']
         video_info = user_data['video_info']
-        user_data["work_folder"] = str(Path(dst_video_folder).parents[0])#dst_video_folder.split('/dst_video_folder')[0]
-        opt = get_opt_(user_data["video_info"]["video_stream"])
+        user_data["work_folder"] = str(Path(source_video_uri.split('mp4')[0]).parents[0])#dst_video_folder.split('/dst_video_folder')[0]
+        opt = get_opt_(user_data["video_info"]["video_stream"], source_video_uri)
         user_data['opt'] = opt
 
         # update related information

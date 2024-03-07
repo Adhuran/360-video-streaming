@@ -1,3 +1,5 @@
+# Author: jayasingam adhuran
+
 import numpy as np
 
 def yuv_import8(file_path, dims, num_frames=1, start_frame=0, frames=None, yuv444=False):
