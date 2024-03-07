@@ -1,4 +1,4 @@
 *.json
 __pycache__/
-*.py[cod]
+*.pyc
 *360LCY_approach_backup.py
