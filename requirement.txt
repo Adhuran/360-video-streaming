@@ -1,4 +1,3 @@
-Python 3.10.13
 kmeans_pytorch
 scikit_learn
 tqdm
