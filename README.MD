@@ -21,9 +21,15 @@ This code is developed as a part of [ACM MMSys Grand Challenge on 360 degree vid
 If this work is used, kindly cite our work in your research.
 
 ```
-Tobe updated
+@proceedings{adhuran_efficient,
+  author = {Adhuran, Jayasingam and Martini, Maria},
+  publisher = {ACM},
+  title = {Efficient viewport prediction and tiling schemes for 360 degree video streaming},
+  url = {https://doi.org/10.1145/3625468.3653425},
+  organization = {ACM Multimedia Systems Conference 2024}
+}
 
-@ARTICLE{9940241,
+@ARTICLE{viewport,
   author={Adhuran, Jayasingam and Kulupana, Gosala and Fernando, Anil},
   journal={IEEE Access}, 
   title={Deep Learning and Bidirectional Optical Flow Based Viewport Predictions for 360° Video Coding}, 
