@@ -1,0 +1,12 @@
+kmeans_pytorch
+scikit_learn
+tqdm
+scipy
+numpy
+torch==1.13.0
+torchvision==0.14.0
+pyyaml
+ffmpeg
+pathlib
+scikit-image
+opencv-python
